@@ -4,6 +4,7 @@ Python library for the Peering Manager API
 ## Usage
 
 Use `.get(id)` to get a single object from an endpoint
+
 use `.all()` to get all objects from an endpoint
 
 Returns a json object containing the data
