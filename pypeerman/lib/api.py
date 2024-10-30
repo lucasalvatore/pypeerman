@@ -4,7 +4,6 @@ import requests
 def make_request(base_url, headers, endpoint):
     url = f"{base_url}{endpoint}"
     response = requests.get(url, headers=headers)
-    # response = requests.get(**kwargs)
     response.raise_for_status()
     return response.json()
 
