@@ -24,6 +24,3 @@ class Peering:
         self.routing_policies = PeeringEndpoint(
             pm_instance, resource_name, "routing-policies"
         )
-        self.available_peers = PeeringSubEndpoint(
-            pm_instance, resource_name, "internet-exchanges", "available-peers"
-        )
