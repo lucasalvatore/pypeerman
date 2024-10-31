@@ -10,7 +10,7 @@ class BaseEndpoint:
         self.endpoint_name = endpoint_name
         self.sub_endpoint_name = sub_endpoint_name
 
-    def get(self, id=None):#, parent_id=None):
+    def get(self, id=None):
         if id and self.sub_endpoint_name:
             # e.g /internet-exchanges/{id}/available-peers
             endpoint = f"/api/{self.resource_name}/{self.endpoint_name}/{id}/{self.sub_endpoint_name}/"
@@ -18,9 +18,7 @@ class BaseEndpoint:
             # e.g /internet-exchanges/{id}
             endpoint = f"/api/{self.resource_name}/{self.endpoint_name}/{id}/"
         else:
-            raise ValueError(
-                "ID is required when using get()."
-            )
+            raise ValueError("ID is required when using get().")
 
         return make_request(
             self.pm_instance.base_url, self.pm_instance.headers, endpoint
@@ -41,6 +39,15 @@ class PeeringEndpoint(BaseEndpoint):
         # Initialize sub-endpoints as attributes
         self.available_peers = PeeringSubEndpoint(
             pm_instance, resource_name, endpoint_name, "available-peers"
+        )
+        self.prefixes = PeeringSubEndpoint(
+            pm_instance, resource_name, endpoint_name, "prefixes"
+        )
+        self.configuration = PeeringSubEndpoint(
+            pm_instance, resource_name, endpoint_name, "configuration"
+        )
+        self.test_napalm_connection = PeeringSubEndpoint(
+            pm_instance, resource_name, endpoint_name, "test-napalm-connection"
         )
 
 

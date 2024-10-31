@@ -24,6 +24,11 @@ class Peering:
         self.routing_policies = PeeringEndpoint(
             pm_instance, resource_name, "routing-policies"
         )
-        self.available_peers = PeeringSubEndpoint(
-            pm_instance, resource_name, "internet-exchanges", "available-peers"
-        )
+        # self.available_peers = PeeringSubEndpoint(
+        #     pm_instance, resource_name, "internet-exchanges", "available-peers"
+        # )
+        # self.prefixes = PeeringSubEndpoint(
+        #     pm_instance, resource_name, "internet-exchanges", "prefixes"
+        # )
+        # self.configuration = PeeringSubEndpoint(pm_instance, resource_name, "routers", "configuration")
+        # self.test_napalm_connection = PeeringSubEndpoint(pm_instance, resource_name, "routers", "test-napalm-connection")
