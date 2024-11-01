@@ -1,4 +1,5 @@
-from pypeerman.core import DynamicEndpoint
+from pypeerman.core.endpoints import DynamicEndpoint
+
 
 class PMEnv:
     def __init__(self, URL: str, KEY: str):

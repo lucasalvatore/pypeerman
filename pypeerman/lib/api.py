@@ -22,3 +22,9 @@ def fetch_all(base_url, headers, endpoint):
         if url == prevurl:
             raise RuntimeError(f"Enountered API pagination loop at {url}")
     return results
+
+
+def make_patch(base_url, headers, endpoint, payload):
+    url = f"{base_url}{endpoint}"
+    patch = requests.patch(url, headers=headers, json=payload)
+    return patch
