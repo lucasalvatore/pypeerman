@@ -9,19 +9,18 @@ class BaseEndpoint:
 
     def get(self, id=None):
         if self.sub_endpoint_name and id:
-            # Construct URL for sub-endpoints with a parent ID
+            # e.g /internet-exchanges/{id}/available-peers
             endpoint = f"/api/{self.parent_path}/{id}/{self.sub_endpoint_name}/"
         else:
+            # e.g /internet-exchanges/{id}
             endpoint = f"/api/{self.parent_path}/{self.resource_name}/{id}/"
 
         return make_request(self.pm_instance.base_url, self.pm_instance.headers, endpoint)
 
     def all(self, parent_id=None):
         if self.sub_endpoint_name and parent_id:
-            # Construct URL for sub-endpoints with a parent ID
             endpoint = f"/api/{self.parent_path}/{parent_id}/{self.sub_endpoint_name}/"
         else:
-            # Construct URL for main endpoints
             endpoint = f"/api/{self.parent_path}/{self.resource_name}/"
 
         return fetch_all(self.pm_instance.base_url, self.pm_instance.headers, endpoint)
@@ -31,7 +30,6 @@ class DynamicEndpoint(BaseEndpoint):
         super().__init__(pm_instance, resource_name, parent_path)
 
     def __getattr__(self, name):
-        # Create sub-endpoints dynamically
         if self.parent_path:
             return SubEndpoint(self.pm_instance, name, f"{self.parent_path}/{self.resource_name}")
         return DynamicEndpoint(self.pm_instance, name, self.resource_name)
