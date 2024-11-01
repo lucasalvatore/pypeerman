@@ -11,13 +11,12 @@ for now just `pip install .`
 
 Use `.get(id)` to get a single object from an endpoint
 
-use `.all()` to get all objects from an endpoint
+Use `.all()` to get all objects from an endpoint
 
 Returns a json object containing the data
 
 All endpoints represented in the API are available
 
-Only http gets are currently suported.
 
  ### Examples
 
@@ -35,4 +34,12 @@ pm.bgp.relationships.get(1)
 Subendpoints also work in the same way:
 ```
 pm.peering.internet_exchanges.available_peers.get(30)
+```
+
+To do a HTTP patch use `.update(id, payload)`
+
+for example:
+```
+payload = {"tags": [{"name": "this-is-a-tag"}]}
+r = pm.peering.internet_exchange_peering_sessions.update(10, payload)
 ```
