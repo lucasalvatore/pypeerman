@@ -1,7 +1,7 @@
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 
 # pypeerman
-Python library for the Peering Manager API
+Python library for the Peering Manager API: https://github.com/peering-manager/peering-manager
 
 ## Installation
 
