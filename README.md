@@ -36,10 +36,25 @@ Subendpoints also work in the same way:
 pm.peering.internet_exchanges.available_peers.get(30)
 ```
 
-To do a HTTP patch use `.update(id, payload)`
+To update an object (HTTP patch) data must be a list containing a dict with the updated data
+The dict must contain the ID of the object(s) to change as the first key,value
 
 for example:
 ```
-payload = {"tags": [{"name": "this-is-a-tag"}]}
-r = pm.peering.internet_exchange_peering_sessions.update(10, payload)
+payload = [
+    {'id': 4491, 'tags': [{'name': 'this-is-a-tag'}]},
+    {'id': 1881, 'tags': [{'name': 'this-is-a-tag'}]}
+    ]
+r = pm.peering.internet_exchange_peering_sessions.update(payload)
 ```
+
+or another example:
+
+```
+payload [
+    {'id': 4491, 'status': 'disabled'},
+    {'id': 1881, 'status': 'maintenance'}
+]
+r = pm.peering.internet_exchange_peering_sessions.update(payload)
+```
+If the patch is successfull the full object(s) will be returned in a list
