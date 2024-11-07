@@ -45,14 +45,14 @@ for example:
 payload = [
     {'id': 4491, 'tags': [{'name': 'this-is-a-tag'}]},
     {'id': 1881, 'tags': [{'name': 'this-is-a-tag'}]}
-    ]
+]
 r = pm.peering.internet_exchange_peering_sessions.update(payload)
 ```
 
 or another example:
 
 ```
-payload [
+payload = [
     {'id': 4491, 'status': 'disabled'},
     {'id': 1881, 'status': 'maintenance'}
 ]
