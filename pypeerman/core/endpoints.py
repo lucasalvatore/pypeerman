@@ -30,13 +30,32 @@ class BaseEndpoint:
 
         return fetch_all(self.pm_instance.base_url, self.pm_instance.headers, endpoint)
 
-    def update(self, id=None, payload={}):
+    def update(self, payload):
+        results = []
         if not payload:
             raise ValueError("Payload must be inculded when using update")
-        endpoint = f"/api/{self.parent_path}/{self.resource_name}/{id}/"
-        return make_patch(
-            self.pm_instance.base_url, self.pm_instance.headers, endpoint, payload
-        )
+        if not isinstance(payload, list):
+            raise TypeError("Payload must be a list")
+
+        for item in payload:
+            endpoint = f"/api/{self.parent_path}/{self.resource_name}/{item.get('id')}/"
+            data = {}
+            k, v = list(item.items())[1]
+            data[k] = v
+            patch = make_patch(
+                self.pm_instance.base_url, self.pm_instance.headers, endpoint, data
+            )
+            if patch.status_code == 200:
+                results.append(
+                    make_request(
+                        self.pm_instance.base_url, self.pm_instance.headers, endpoint
+                    )
+                )
+            else:
+                raise ValueError(
+                    f"Error while updating object id {item['id']}: {patch.text}"
+                )
+        return results
 
 
 class DynamicEndpoint(BaseEndpoint):
