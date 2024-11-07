@@ -37,7 +37,7 @@ pm.peering.internet_exchanges.available_peers.get(30)
 ```
 
 To update an object (HTTP patch) data must be a list containing a dict with the updated data
-The dict must contain the ID of the object(s) to change
+The dict must contain the ID of the object(s) to change as the first key,value
 
 for example:
 ```
